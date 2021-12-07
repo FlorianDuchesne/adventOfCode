@@ -1,5 +1,7 @@
 <?php
 
+// indice puzzle
+
 $input = "173
 178
 179
@@ -2002,11 +2004,27 @@ $input = "173
 9299
 ";
 
-$input = explode("\n", $input);
-
-// var_dump($input);
+// partie 1
 
 $count = 0;
+
+$input = explode("\n", $input);
+
+foreach ($input as &$value) {
+  $value = intval($value);
+}
+
+foreach ($input as $value) {
+  if (isset($previousInput)) {
+    if ($value > $previousInput) {
+      $count++;
+    }
+  }
+  $previousInput = $value;
+}
+var_dump($count);
+
+// Partie 2
 
 $newArray = [];
 $i = 0;
@@ -2014,11 +2032,6 @@ while ($i < ((max(array_keys(($input))))) - 2) {
   $newArray[] = ($input[$i] + $input[$i + 1] + $input[$i + 2]);
   $i++;
 }
-// var_dump(max(array_keys(($input))));
-// echo "<br>";
-// var_dump($newArray);
-// echo "<br>";
-// var_dump($input);
 
 $count = 0;
 
