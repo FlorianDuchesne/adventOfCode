@@ -1004,26 +1004,24 @@ forward 3
 
 $input = explode("\n", $input);
 
-// var_dump($input);
-
 $depth = 0;
 $distance = 0;
-
+$test = "string";
 foreach ($input as $value) {
 
   switch (true) {
-    case strpos($value, "down"):
-      $depth = $depth + intval(substr($value, -1));
+    case $test == strpos($value, "down"):
+      $depth = $depth + intval(substr($value, -2));
       break;
-    case strpos($value, "up"):
-      $depth = $depth - intval(substr($value, -1));
+    case $test == strpos($value, "up"):
+      $depth = $depth - intval(substr($value, -2));
       break;
-    case strpos($value, "forward"):
-      $distance = $distance + intval(substr($value, -1));
+    case $test == strpos($value, "forward"):
+      $distance = $distance + intval(substr($value, -2));
       break;
   }
 }
 
 var_dump($depth);
 var_dump($distance);
-var_dump("test");
+var_dump($distance * $depth);
