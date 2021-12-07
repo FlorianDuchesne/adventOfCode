@@ -1022,6 +1022,34 @@ foreach ($input as $value) {
   }
 }
 
-var_dump($depth);
-var_dump($distance);
+// var_dump($depth);
+// var_dump($distance);
+// var_dump($distance * $depth);
+
+// partie 2
+
+$depth = 0;
+$distance = 0;
+$aim = 0;
+$test = "string";
+foreach ($input as $value) {
+
+  switch (true) {
+    case $test == strpos($value, "down"):
+      //$depth = $depth + intval(substr($value, -2));
+      $aim = $aim + intval(substr($value, -2));
+      break;
+    case $test == strpos($value, "up"):
+      //$depth = $depth - intval(substr($value, -2));
+      $aim = $aim - intval(substr($value, -2));
+      break;
+    case $test == strpos($value, "forward"):
+      $distance = $distance + intval(substr($value, -2));
+      // if ($aim > 0){
+        $depth = $depth + ($aim * (intval(substr($value, -2))));
+      // }
+      break;
+  }
+}
+
 var_dump($distance * $depth);
