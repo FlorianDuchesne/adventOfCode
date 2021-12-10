@@ -1015,15 +1015,17 @@ for ($j = 0; $j <= (strlen($input[0]) - 2); $j++){
     // pour chaque ligne,
     for ($i = 0; $i <= (count($input) - 1); $i++){
     $array[] = $input[$i][$j];
+    $input[$i][$j] == "1" ? $count0++ : $count1++; 
+    // relire et décortiquer code ci-dessus
 }
 // var_dump($array);
-foreach ($array as $value){
-  // var_dump($value);
-  $value == "0" ? $count0++ : $count1++; 
-}
+// foreach ($array as $value){
+//   // var_dump($value);
+//   $value == "1" ? $count0++ : $count1++; 
+// }
 
 $count1 < $count0 ? $majorSign[] = 0 : $majorSign[] = 1;  
 
-var_dump($majorSign);
 
 }
+var_dump($majorSign);
