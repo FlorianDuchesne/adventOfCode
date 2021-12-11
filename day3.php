@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $input = "011010010110
 101110100110
@@ -1004,28 +1004,37 @@ $input = "011010010110
 $input = explode("\n", $input);
 // var_dump((strlen($input[0]) - 1));
 
-$array = [];
 $majorSign = [];
 
-// Pour chaque "colonne",
-for ($j = 0; $j <= (strlen($input[0]) - 2); $j++){
+// Pour chaque "colonne" (c'est-à-dire douze fois),
+for ($j = 0; $j <= (strlen($input[0]) - 1); $j++) {
     $count1 = 0;
     $count0 = 0;
 
     // pour chaque ligne,
-    for ($i = 0; $i <= (count($input) - 1); $i++){
-    $array[] = $input[$i][$j];
-    $input[$i][$j] == "1" ? $count0++ : $count1++; 
-    // relire et décortiquer code ci-dessus
-}
-// var_dump($array);
-// foreach ($array as $value){
-//   // var_dump($value);
-//   $value == "1" ? $count0++ : $count1++; 
-// }
-
-$count1 < $count0 ? $majorSign[] = 0 : $majorSign[] = 1;  
-
-
+    for ($i = 0; $i <= (count($input) - 1); $i++) {
+        // on teste si la valeur associée à la ligne(i) et la colonne(j)
+        // est égale à 1, en fonction on incrémente les comptes de 0 ou 1
+        $input[$i][$j] == "1" ? $count0++ : $count1++;
+    }
+    // Pour chaque colonne tjrs, on checke le signe majoritaire
+    $count1 < $count0 ? $majorSign[] = 0 : $majorSign[] = 1;
 }
 var_dump($majorSign);
+$gammaRate = $majorSign;
+$epsilonRate = [];
+foreach ($gammaRate as $value) {
+    $value == "1" ? $epsilonRate[] = 0 : $epsilonRate[] = 1;
+}
+var_dump($epsilonRate);
+$valueGammaRate = 0;
+$valueEpsilonRate = 0;
+$counter = 1;
+for ($j = 11; $j >= 0; $j--) {
+
+    $valueGammaRate = ($gammaRate[$j] * $counter) + $valueGammaRate;
+    $valueEpsilonRate = ($epsilonRate[$j] * $counter) + $valueEpsilonRate;
+    $counter = $counter * 2;
+}
+$answer = $valueGammaRate * $valueEpsilonRate;
+var_dump($answer);
